@@ -1,6 +1,14 @@
-import sys, os.path, httplib, cgi, urlparse, functools, mimetypes
+import sys, os.path, cgi, functools, mimetypes
+if sys.version_info[0] == 2:
+    import httplib
+    import urlparse
+    import BaseHTTPServer
+else:
+    import http.client as httplib
+    import http.server as BaseHTTPServer
+    import urllib.parse as urlparse
+
 import os, traceback, random, base64, inspect
-import BaseHTTPServer
 from snakes.utils.simul import logger as log
 from snakes.utils.simul.html import json, utf8
 
@@ -203,4 +211,4 @@ if __name__ == '__main__':
         httpd = HTTPServer(('', 1234), HelloNode(r=DirNode(".")))
         httpd.serve_forever()
     except KeyboardInterrupt :
-        print "\rGoobye"
+        print("\rGoobye")

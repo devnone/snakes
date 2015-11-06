@@ -2043,7 +2043,7 @@ class Place (Node) :
         """Iterate over the tokens in the place, including
         repetitions.
 
-        >>> p = Place('p', range(3)*2)
+        >>> p = Place('p', list(range(3))*2)
         >>> list(sorted([tok for tok in p]))
         [0, 0, 1, 1, 2, 2]
 
@@ -3592,8 +3592,7 @@ class PetriNet (object) :
           ...
         ConstraintError: transition 't' not found
         >>> n.transition()
-        [Transition('t2', Expression('True')),
-         Transition('t1', Expression('True'))]
+        [Transition('t2', Expression('True')), Transition('t1', Expression('True'))]
 
         @param name: the name of the transition to retrieve or `None`
             to get the list of all the transitions in the net

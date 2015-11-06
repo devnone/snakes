@@ -6,6 +6,12 @@ import snakes.utils.abcd.transform as transform
 from snakes.data import MultiSet
 from snakes import *
 
+if sys.version_info[0] == 2:
+    _BUILTINS = sys.modules["__builtin__"]
+else:
+    from functools import reduce
+    _BUILTINS = inspect.builtins
+
 class Decl (object) :
     OBJECT = "object"
     TYPE = "type"
@@ -572,12 +578,13 @@ class Builder (object) :
             return self[name].type
         elif name in self.globals :
             obj = self.globals[name]
+            #print(type(self.globals._env), sorted(self.globals._env), file=sys.stderr)
             if inspect.isclass(obj) :
                 return self.snk.Instance(obj)
             elif inspect.isroutine(obj) :
                 return self.snk.TypeCheck(obj)
-        elif hasattr(sys.modules["__builtin__"], name) :
-            obj = getattr(sys.modules["__builtin__"], name)
+        elif hasattr(_BUILTINS, name) :
+            obj = getattr(_BUILTINS, name)
             if inspect.isclass(obj) :
                 return self.snk.Instance(obj)
             elif inspect.isroutine(obj) :

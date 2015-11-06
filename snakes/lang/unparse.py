@@ -290,6 +290,9 @@ class Unparser:
     def _Str(self, tree):
         self.write(repr(tree.s))
 
+    def _NameConstant(self, t):
+        self.write(str(t.value))
+
     def _Name(self, t):
         self.write(t.id)
 

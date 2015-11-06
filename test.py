@@ -15,6 +15,7 @@ def test (module) :
     f, t = doctest.testmod(module, #verbose=True,
                            optionflags=doctest.NORMALIZE_WHITESPACE
                            | doctest.REPORT_ONLY_FIRST_FAILURE
+                           | doctest.IGNORE_EXCEPTION_DETAIL
                            | doctest.ELLIPSIS)
     return f
 

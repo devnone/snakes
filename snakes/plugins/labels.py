@@ -127,7 +127,7 @@ def extend (module) :
             >>> new
             Transition('t', Expression('True'))
             >>> new.__class__
-            <class 'snakes.plugins.labels.Transition'>
+            <class 'snakes.plugins.labels...Transition'>
             >>> new.label('foo', 'spam')
             ('bar', 42)
             """
@@ -203,7 +203,7 @@ def extend (module) :
             >>> new
             Place('p', MultiSet([]), tAll)
             >>> new.__class__
-            <class 'snakes.plugins.labels.Place'>
+            <class 'snakes.plugins.labels...Place'>
             >>> new.label('foo', 'spam')
             ('bar', 42)
             """
@@ -275,7 +275,7 @@ def extend (module) :
             >>> new
             PetriNet('n')
             >>> new.__class__
-            <class 'snakes.plugins.labels.PetriNet'>
+            <class 'snakes.plugins.labels...PetriNet'>
             >>> new.label('foo', 'spam')
             ('bar', 42)
             """

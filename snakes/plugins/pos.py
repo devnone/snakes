@@ -270,7 +270,7 @@ def extend (module) :
             >>> new
             Transition('t', Expression('True'))
             >>> new.__class__
-            <class 'snakes.plugins.pos.Transition'>
+            <class 'snakes.plugins.pos...Transition'>
             """
             result = new_instance(cls, module.Transition.__pnmlload__(tree))
             try :

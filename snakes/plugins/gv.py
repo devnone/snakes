@@ -52,6 +52,10 @@ import snakes.plugins
 from snakes.plugins.clusters import Cluster
 from snakes.compat import *
 
+import sys
+if sys.version_info[0] > 2:
+    unicode = str
+
 # apidoc skip
 class Graph (Cluster) :
     def __init__ (self, attr) :

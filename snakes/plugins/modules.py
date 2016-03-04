@@ -18,12 +18,12 @@ plugin `snakes.plugins.labels`).
 
 >>> import snakes.plugins
 >>> snakes.plugins.load(["ops", "modules"], "snakes.nets", "snk")
-<module 'snk' ...>
+<module ...>
 >>> from snk import *
 >>> n1 = PetriNet("n1", modules="hello")
 >>> n1.add_place(Place("p"))
->>> n1.place("p").modules()
-set(['hello'])
+>>> list(n1.place("p").modules())
+['hello']
 >>> n1.add_place(Place("q"))
 >>> n2 = PetriNet("n2", modules="world")
 >>> n2.add_place(Place("r"))

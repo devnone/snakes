@@ -159,43 +159,27 @@ class MultiSet (hdict) :
          <multiset>
           <item>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
-           <multiplicity>
-           ...
-           </multiplicity>
+           <multiplicity>...</multiplicity>
           </item>
           <item>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
-           <multiplicity>
-           ...
-           </multiplicity>
+           <multiplicity>...</multiplicity>
           </item>
           <item>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
-           <multiplicity>
-           ...
-           </multiplicity>
+           <multiplicity>...</multiplicity>
           </item>
           <item>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
-           <multiplicity>
-           ...
-           </multiplicity>
+           <multiplicity>...</multiplicity>
           </item>
          </multiset>
         </pnml>
@@ -643,23 +627,15 @@ class Substitution (object) :
         <pnml>
          <substitution>
           <item>
-           <name>
-           ...
-           </name>
+           <name>...</name>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
           </item>
           <item>
-           <name>
-           ...
-           </name>
+           <name>...</name>
            <value>
-            <object type="int">
-            ...
-            </object>
+            <object type="int">...</object>
            </value>
           </item>
          </substitution>
@@ -959,9 +935,7 @@ class Symbol (object) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <symbol name="egg">
-          <object type="str">
-           spam
-          </object>
+          <object type="str">spam</object>
          </symbol>
         </pnml>
         >>> Symbol('foo').__pnmldump__()
@@ -973,9 +947,7 @@ class Symbol (object) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <symbol name="bar">
-          <object type="bool">
-           False
-          </object>
+          <object type="bool">False</object>
          </symbol>
         </pnml>
         """

@@ -22,14 +22,10 @@ class Query (object) :
         <pnml>
          <query name="set">
           <argument>
-           <object type="str">
-            x
-           </object>
+           <object type="str">x</object>
           </argument>
           <argument>
-           <object type="int">
-            42
-           </object>
+           <object type="int">42</object>
           </argument>
          </query>
         </pnml>
@@ -38,9 +34,7 @@ class Query (object) :
         <pnml>
          <query name="test">
           <keyword name="x">
-           <object type="int">
-            1
-           </object>
+           <object type="int">1</object>
           </keyword>
          </query>
         </pnml>
@@ -49,37 +43,35 @@ class Query (object) :
         <pnml>
          <query name="test">
           <argument>
-           <object type="str">
-            x
-           </object>
+           <object type="str">x</object>
           </argument>
           <argument>
-           <object type="int">
-            42
-           </object>
+           <object type="int">42</object>
           </argument>
           <keyword name="y">
-           <object type="int">
-            1
-           </object>
+           <object type="int">1</object>
           </keyword>
          </query>
         </pnml>
         >>> Query('set', 'x', Query('call', 'x.upper')).__pnmldump__()
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
+         <snakes version=...>
+          <plugins>
+           <object type="tuple">
+            <object type="str">snakes.nets</object>
+            <object type="str">snakes.plugins.query</object>
+           </object>
+          </plugins>
+         </snakes>
          <query name="set">
           <argument>
-           <object type="str">
-            x
-           </object>
+           <object type="str">x</object>
           </argument>
           <argument>
            <query name="call">
             <argument>
-             <object type="str">
-              x.upper
-             </object>
+             <object type="str">x.upper</object>
             </argument>
            </query>
           </argument>

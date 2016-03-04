@@ -246,11 +246,11 @@ class Tokenizer (object) :
         so that exactly the same Tokenizer instance can be recovered
         from the returned source code.
 
-        >>> print repr(Tokenizer())
+        >>> print(repr(Tokenizer()))
         Tokenizer()
-        >>> print repr(Tokenizer(DOLLAR='$'))
+        >>> print(repr(Tokenizer(DOLLAR='$')))
         Tokenizer(DOLLAR='$')
-        >>> print repr(Tokenizer(skip=[], DOLLAR='$'))
+        >>> print(repr(Tokenizer(skip=[], DOLLAR='$')))
         Tokenizer(skip=[], DOLLAR='$')
         """
         args = []
@@ -359,7 +359,7 @@ class PgenParser (object) :
 
         This is basically the only method that is needed:
 
-        >>> mygrammar = PgenParser.parse('myfile.pgen')
+        mygrammar = PgenParser.parse('myfile.pgen')
         """
         return cls().parse_file(filename)
     def parse_file (self, filename) :
@@ -903,7 +903,7 @@ class PyPgen (object) :
         self = PyPgen(gst, tokenizer)
         outfile = open(tgt, "w")
         outfile.write(("# this file has been automatically generated running:\n"
-                       "# %s\n\n") % " ".join(sys.argv))
+                       "# %s %s\n\n") % (os.path.basename(sys.executable), " ".join(sys.argv)))
         outfile.write(self.python(pgen, inline))
         outfile.close()
     # the rest of the class has not changed too much
@@ -1141,7 +1141,7 @@ class PyPgen (object) :
             elif kind == self.tokenizer.STRING :
                 assert name[0] == name[-1]
                 sname = name[1:-1]
-                if (sname[0] in string.letters) or (sname[0] == "_") :
+                if (sname[0] in string.ascii_letters) or (sname[0] == "_") :
                     labelList[labelIndex] = (self.tokenizer.NAME, sname)
                 elif sname in self.operatorMap :
                     labelList[labelIndex] = (self.operatorMap[sname],
@@ -1191,7 +1191,7 @@ class PyPgen (object) :
                 crntBits = set & 0xff
                 result.append(chr(crntBits))
                 set >>= 8
-            properSize = (len(grammar[1]) / 8) + 1
+            properSize = (len(grammar[1]) // 8) + 1
             if len(result) < properSize :
                 result.append('\x00' * (properSize - len(result)))
             dfa[4] = "".join(result)

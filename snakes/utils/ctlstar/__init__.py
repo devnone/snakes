@@ -16,7 +16,7 @@ syntax_) below.
 ... A (G (evenplace(p=@'some_place') => F oddplace(p=@'another_place')))
 ... '''
 >>> tree = build(spec)
->>> print ast.dump(tree)
+>>> print(ast.dump(tree))
 CtlUnary(op=All(), child=CtlUnary(op=Globally(), child=CtlBinary(op=Imply(), ...
 
 In the example above, `atom` allows to define parameterised atomic

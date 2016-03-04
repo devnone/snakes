@@ -1,5 +1,5 @@
 # this file has been automatically generated running:
-# snakes/lang/pgen.py --output=snakes/lang/python/pgen.py snakes/lang/python/python.pgen
+# python2 snakes/lang/pgen.py --output=snakes/lang/python/pgen.py snakes/lang/python/python.pgen
 
 import tokenize, snakes.lang.pgen
 
@@ -17895,4 +17895,4 @@ if __name__ == '__main__' :
     # just for test purpose
     import sys, pprint
     st = parser.parseStream(sys.stdin)
-    print((parser.pprint(st)))
+    print(parser.pprint(st))

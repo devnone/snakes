@@ -281,9 +281,7 @@ class Tree (object) :
         >>> Tree.from_dom(dom.documentElement)
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <object type="int">
-          42
-         </object>
+         <object type="int">42</object>
         </pnml>
 
         @param node: the DOM node to load
@@ -310,9 +308,7 @@ class Tree (object) :
         >>> Tree.from_pnml(src)
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <object type="int">
-          42
-         </object>
+         <object type="int">42</object>
         </pnml>
 
         @param source: the XML string to load or an opened file that
@@ -453,27 +449,21 @@ class Tree (object) :
         >>> t
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <foo>
-          hello
-         </foo>
+         <foo>hello</foo>
         </pnml>
         >>> t.add_data('world')
         >>> t
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <foo>
-          hello
-          world
-         </foo>
+         <foo>hello
+          world</foo>
         </pnml>
         >>> t.add_data('!', '')
         >>> t
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <foo>
-          hello
-          world!
-         </foo>
+         <foo>hello
+          world!</foo>
         </pnml>
 
         @param data: the data to add
@@ -690,23 +680,15 @@ class Tree (object) :
         >>> Tree.from_obj(42)
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <object type="int">
-          42
-         </object>
+         <object type="int">42</object>
         </pnml>
         >>> Tree.from_obj([1, 2, 3])
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <object type="list">
-          <object type="int">
-           1
-          </object>
-          <object type="int">
-           2
-          </object>
-          <object type="int">
-           3
-          </object>
+          <object type="int">1</object>
+          <object type="int">2</object>
+          <object type="int">3</object>
          </object>
         </pnml>
 
@@ -717,9 +699,7 @@ class Tree (object) :
         >>> Tree.from_obj(re.compile('foo|bar')) # serialized data replaced with '...'
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <object type="pickle">
-          ...
-         </object>
+         <object type="pickle">...</object>
         </pnml>
 
         @param obj: the object to convert to PNML
@@ -881,8 +861,7 @@ class Tree (object) :
         >>> Tree.from_obj([1, 2, 3]).to_obj()
         [1, 2, 3]
         >>> import re
-        >>> Tree.from_obj(re.compile('foo|bar')).to_obj()
-        <... object at ...>
+        >>> _ = Tree.from_obj(re.compile('foo|bar')).to_obj()
 
         @return: the Python object encoded by the PNML tree
         @rtype: `object`
@@ -922,9 +901,7 @@ def dumps (obj) :
     >>> print(dumps(42))
     <?xml version="1.0" encoding="utf-8"?>
     <pnml>
-     <object type="int">
-      42
-     </object>
+     <object type="int">42</object>
     </pnml>
 
     @param obj: the object to dump

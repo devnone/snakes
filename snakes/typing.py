@@ -786,21 +786,11 @@ class OneOf (Type) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <type domain="enum">
-          <object type="int">
-           1
-          </object>
-          <object type="int">
-           2
-          </object>
-          <object type="int">
-           3
-          </object>
-          <object type="int">
-           4
-          </object>
-          <object type="int">
-           5
-          </object>
+          <object type="int">1</object>
+          <object type="int">2</object>
+          <object type="int">3</object>
+          <object type="int">4</object>
+          <object type="int">5</object>
          </type>
         </pnml>
 
@@ -935,14 +925,10 @@ class Collection (Type) :
            </type>
           </items>
           <min>
-           <object type="int">
-            3
-           </object>
+           <object type="int">3</object>
           </min>
           <max>
-           <object type="int">
-            10
-           </object>
+           <object type="int">10</object>
           </max>
          </type>
         </pnml>
@@ -1224,19 +1210,13 @@ class Range (Type) :
         <pnml>
          <type domain="range">
           <first>
-           <object type="int">
-            1
-           </object>
+           <object type="int">1</object>
           </first>
           <last>
-           <object type="int">
-            10
-           </object>
+           <object type="int">10</object>
           </last>
           <step>
-           <object type="int">
-            2
-           </object>
+           <object type="int">2</object>
           </step>
          </type>
         </pnml>
@@ -1326,9 +1306,7 @@ class Greater (Type) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <type domain="greater">
-          <object type="int">
-           42
-          </object>
+          <object type="int">42</object>
          </type>
         </pnml>
 
@@ -1407,9 +1385,7 @@ class GreaterOrEqual (Type) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <type domain="greatereq">
-          <object type="int">
-           42
-          </object>
+          <object type="int">42</object>
          </type>
         </pnml>
 
@@ -1483,9 +1459,7 @@ class Less (Type) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <type domain="less">
-          <object type="int">
-           3
-          </object>
+          <object type="int">3</object>
          </type>
         </pnml>
 
@@ -1560,9 +1534,7 @@ class LessOrEqual (Type) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <type domain="lesseq">
-          <object type="int">
-           4
-          </object>
+          <object type="int">4</object>
          </type>
         </pnml>
 

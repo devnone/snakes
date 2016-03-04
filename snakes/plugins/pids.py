@@ -88,14 +88,11 @@ class Pid (tuple) :
         2
         """
         return self[i]
-    def __getitem__ (self, start, stop=None) :
-        if stop is None :
-            return tuple.__getitem__(self, start)
-        else :
-            return self.__getslice__(start, stop)
-    def __getslice__ (self, start, stop=sys.maxint) :
+    def __getitem__ (self, index):
         """
         >>> pid = Pid(1, 2, 3, 4)
+        >>> pid[2]
+        3
         >>> pid[:]
         Pid(1, 2, 3, 4)
         >>> pid[1:]
@@ -107,8 +104,20 @@ class Pid (tuple) :
         >>> pid[1:3]
         Pid(2, 3)
         """
-        return self.__class__(tuple.__getslice__(self, start, stop))
-    def subpid (self, start=0, stop=sys.maxint) :
+        if isinstance(index, int):
+            return tuple.__getitem__(self, index)
+        else:
+            return self.__getslice__(index)
+    if sys.version_info[0] == 2:
+        def __getslice__(self, *args, **kwargs):
+            return self.__class__(tuple.__getslice__(self, *args, **kwargs))
+    else:
+        def __getslice__(self, *args, **kwargs):
+            return self.__class__(tuple.__getitem__(self, *args, **kwargs))
+
+    #def __getslice__ (self, start, stop=sys.maxsize) :
+    #    return self.__class__(tuple.__getslice__(self, start, stop))
+    def subpid (self, start=0, stop=sys.maxsize) :
         """
         >>> pid = Pid(1, 2, 3, 4)
         >>> pid.subpid(0)

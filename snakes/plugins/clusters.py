@@ -43,15 +43,9 @@ class Cluster (object) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>...
          <clusters>
-          <node>
-          ...
-          </node>
-          <node>
-          ...
-          </node>
-          <clusters>
-          ...
-          </clusters>
+          <node>...</node>
+          <node>...</node>
+          <clusters>...</clusters>
          </clusters>
         </pnml>
         """

@@ -20,11 +20,16 @@ For example, let's first define a Petri net:
 Thanks to plugin `gv`, we can draw it using the various engines of
 GraphViz; we can also draw the state graph:
 
->>> for engine in ('neato', 'dot', 'circo', 'twopi', 'fdp') :
-...     n.draw(',test-gv-%s.png' % engine, engine=engine)
->>> s = StateGraph(n)
->>> s.build()
->>> s.draw(',test-gv-graph.png')
+>>> import os, shutil, tempfile
+>>> try:
+...     tmpdir = tempfile.mkdtemp()
+...     for engine in ('neato', 'dot', 'circo', 'twopi', 'fdp') :
+...         _ = n.draw(os.path.join(tmpdir, ',test-gv-%s.png' % engine), engine=engine)
+...     s = StateGraph(n)
+...     s.build()
+...     _ = s.draw(os.path.join(tmpdir, ',test-gv-graph.png'))
+... finally:
+...     shutil.rmtree(tmpdir)
 
 The plugin also allows to layout the nodes without drawing the net
 (this is only available for `PetriNet`, not for `StateGraph`). We
@@ -201,8 +206,13 @@ def extend (module) :
             ...         attr['label'] = trans.name
             ...     else :
             ...         attr['label'] = '%s\\n%s' % (trans.name, trans.guard)
-            >>> n.draw(',net-with-colors.png',
-            ...        place_attr=draw_place, trans_attr=draw_transition)
+            >>> import os, shutil, tempfile
+            >>> try:
+            ...     tmpdir = tempfile.mkdtemp()
+            ...     _ = n.draw(os.path.join(tmpdir, ',net-with-colors.png'),
+            ...                place_attr=draw_place, trans_attr=draw_transition)
+            ... finally:
+            ...     shutil.rmtree(tmpdir)
 
             @param filename: the name of the image file to create
             @type filename: `str`

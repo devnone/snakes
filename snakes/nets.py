@@ -3,6 +3,7 @@ elements: arcs, places, transitions, markings, nets themselves and
 marking graphs.
 """
 
+import collections
 import re, operator, inspect
 from snakes import *
 from snakes.compat import *
@@ -15,6 +16,9 @@ from snakes.typing import *
 """
 ## Auxiliary definitions ##
 """
+
+_dict_factory = collections.OrderedDict
+
 
 class Evaluator (object) :
     """Evaluate expression or execute statements in shareable
@@ -511,9 +515,7 @@ class Value (ArcAnnotation) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
           <value>
-            <object type="int">
-              3
-            </object>
+            <object type="int">3</object>
           </value>
         </pnml>
 
@@ -684,9 +686,7 @@ class Variable (ArcAnnotation) :
         >>> Variable('x').__pnmldump__()
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-          <variable>
-            x
-          </variable>
+          <variable>x</variable>
         </pnml>
 
         @return: PNML tree
@@ -857,9 +857,7 @@ class Expression (ArcAnnotation) :
         >>> Expression('x+1').__pnmldump__()
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-          <expression>
-            x+1
-          </expression>
+          <expression>x+1</expression>
         </pnml>
         """
         return Tree(self.__pnmltag__, self._str)
@@ -1087,13 +1085,9 @@ class MultiArc (ArcAnnotation) :
         <pnml>
           <multiarc>
             <value>
-              <object type="int">
-                3
-              </object>
+              <object type="int">3</object>
             </value>
-            <expression>
-              x+1
-            </expression>
+            <expression>x+1</expression>
           </multiarc>
         </pnml>
 
@@ -1276,13 +1270,9 @@ class Tuple (MultiArc) :
     <?xml version="1.0" encoding="utf-8"?>
     <pnml>
      <tuple>
-      <variable>
-       x
-      </variable>
+      <variable>x</variable>
       <value>
-       <object type="int">
-        3
-       </object>
+       <object type="int">3</object>
       </value>
      </tuple>
     </pnml>
@@ -1377,9 +1367,7 @@ class Test (ArcAnnotation) :
         <pnml>
           <test>
             <value>
-              <object type="int">
-                3
-              </object>
+              <object type="int">3</object>
             </value>
           </test>
         </pnml>
@@ -1549,15 +1537,11 @@ class Inhibitor (Test) :
          <inhibitor>
           <annotation>
            <value>
-            <object type="int">
-             3
-            </object>
+            <object type="int">3</object>
            </value>
           </annotation>
           <condition>
-           <expression>
-            True
-           </expression>
+           <expression>True</expression>
           </condition>
          </inhibitor>
         </pnml>
@@ -1741,9 +1725,7 @@ class Flush (ArcAnnotation) :
         >>> Flush('x').__pnmldump__()
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
-         <flush>
-          x
-         </flush>
+         <flush>x</flush>
         </pnml>
         """
         return Tree(self.__pnmltag__, self._expr)
@@ -1932,9 +1914,7 @@ class Place (Node) :
         <pnml>
           <place id="p">
             <initialMarking>
-              <text>
-                2
-              </text>
+              <text>2</text>
             </initialMarking>
           </place>
         </pnml>
@@ -1950,16 +1930,12 @@ class Place (Node) :
            </left>
            <right>
             <type domain="greatereq">
-             <object type="int">
-              0
-             </object>
+             <object type="int">0</object>
             </type>
            </right>
           </type>
           <initialMarking>
-           <multiset>
-           ...
-           </multiset>
+           <multiset>...</multiset>
           </initialMarking>
          </place>
         </pnml>
@@ -2183,8 +2159,8 @@ class Transition (Node) :
         @param guard: the guard of the transition
         @type guard: `Expression`
         """
-        self._input = {}
-        self._output = {}
+        self._input = _dict_factory()
+        self._output = _dict_factory()
         if guard is None :
             self.guard = Expression("True")
         else :
@@ -2221,9 +2197,7 @@ class Transition (Node) :
         <pnml>
          <transition id="t">
           <guard>
-           <expression>
-            x==y
-           </expression>
+           <expression>x==y</expression>
           </guard>
          </transition>
         </pnml>
@@ -2687,13 +2661,9 @@ class Marking (hdict) :
             <multiset>
              <item>
               <value>
-               <object type="int">
-                2
-               </object>
+               <object type="int">2</object>
               </value>
-              <multiplicity>
-               1
-              </multiplicity>
+              <multiplicity>1</multiplicity>
              </item>
             </multiset>
            </tokens>
@@ -2703,13 +2673,9 @@ class Marking (hdict) :
             <multiset>
              <item>
               <value>
-               <object type="int">
-                1
-               </object>
+               <object type="int">1</object>
               </value>
-              <multiplicity>
-               1
-              </multiplicity>
+              <multiplicity>1</multiplicity>
              </item>
             </multiset>
            </tokens>
@@ -2726,8 +2692,8 @@ class Marking (hdict) :
     def __pnmlload__ (cls, tree) :
         """
         >>> t = Marking(p1=MultiSet([1]), p2=MultiSet([2])).__pnmldump__()
-        >>> Marking.__pnmlload__(t)
-        Marking({'p2': MultiSet([2]), 'p1': MultiSet([1])})
+        >>> Marking.__pnmlload__(t) == Marking({'p2': MultiSet([2]), 'p1': MultiSet([1])})
+        True
         """
         return cls(((child["id"], child.child("tokens").child().to_obj())
                     for child in tree.get_children("place")))
@@ -2782,8 +2748,8 @@ class Marking (hdict) :
     def __sub__ (self, other) :
         """Substraction of markings.
 
-        >>> Marking(p1=MultiSet([1]), p2=MultiSet([2, 2])) - Marking(p2=MultiSet([2]))
-        Marking({'p2': MultiSet([2]), 'p1': MultiSet([1])})
+        >>> Marking(p1=MultiSet([1]), p2=MultiSet([2, 2])) - Marking(p2=MultiSet([2])) == Marking({'p2': MultiSet([2]), 'p1': MultiSet([1])})
+        True
         >>> try : Marking(p1=MultiSet([1]), p2=MultiSet([2])) - Marking(p2=MultiSet([2, 2]))
         ... except ValueError : print(sys.exc_info()[1])
         not enough occurrences
@@ -2997,9 +2963,9 @@ class PetriNet (object) :
         @type name: `str`
         """
         self.name = name
-        self._trans = {}
-        self._place = {}
-        self._node = {}
+        self._trans = _dict_factory()
+        self._place = _dict_factory()
+        self._node = _dict_factory()
         self._declare = []
         self.globals = Evaluator()
     # apidoc skip
@@ -3045,18 +3011,14 @@ class PetriNet (object) :
         (<?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <inscription>
-          <text>
-           1
-          </text>
+          <text>1</text>
          </inscription>
         </pnml>,)
         >>> PetriNet._pnml_dump_arc(MultiArc([Value(dot), Value(dot)]))
         (<?xml version="1.0" encoding="utf-8"?>
          <pnml>
           <inscription>
-           <text>
-            2
-           </text>
+           <text>2</text>
           </inscription>
          </pnml>,)
         >>> PetriNet._pnml_dump_arc(Value(1))
@@ -3064,9 +3026,7 @@ class PetriNet (object) :
          <pnml>
           <inscription>
            <value>
-            <object type="int">
-             1
-            </object>
+            <object type="int">1</object>
            </value>
           </inscription>
          </pnml>,)
@@ -3074,18 +3034,14 @@ class PetriNet (object) :
         (<?xml version="1.0" encoding="utf-8"?>
          <pnml>
           <inscription>
-           <variable>
-            x
-           </variable>
+           <variable>x</variable>
           </inscription>
          </pnml>,)
         >>> PetriNet._pnml_dump_arc(MultiArc([Value(dot), Variable('y')]))
         (<?xml version="1.0" encoding="utf-8"?>
          <pnml>
           <inscription>
-           <text>
-            2
-           </text>
+           <text>2</text>
           </inscription>
          </pnml>,)
 
@@ -3119,35 +3075,19 @@ class PetriNet (object) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>
          <net id="N">
-          <declare>
-           x = &quot;foo&quot; + &quot;bar&quot;
-          </declare>
+          <declare>x = &quot;foo&quot; + &quot;bar&quot;</declare>
           <global name="y">
-           <object type="str">
-            egg
-           </object>
+           <object type="str">egg</object>
           </global>
-          <place id="...">
-          ...
-          </place>
-          <place id="...">
-          ...
-          </place>
-          <place id="...">
-          ...
-          </place>
+          <place id="...">...</place>
+          <place id="...">...</place>
+          <place id="...">...</place>
           <transition id="..."/>
           <transition id="..."/>
           <transition id="..."/>
-          <arc id="..." source="..." target="...">
-          ...
-          </arc>
-          <arc id="..." source="..." target="...">
-          ...
-          </arc>
-          <arc id="..." source="..." target="...">
-          ...
-          </arc>
+          <arc id="..." source="..." target="...">...</arc>
+          <arc id="..." source="..." target="...">...</arc>
+          <arc id="..." source="..." target="...">...</arc>
          </net>
         </pnml>
 
@@ -3155,7 +3095,7 @@ class PetriNet (object) :
         @rtype: `pnml.Tree`
         """
         result = Tree(self.__pnmltag__, None, id=self.name)
-        decl = {}
+        decl = _dict_factory()
         exec("pass", decl)
         for stmt in self._declare :
             try :
@@ -3562,8 +3502,8 @@ class PetriNet (object) :
         Traceback (most recent call last):
           ...
         ConstraintError: place 'p' not found
-        >>> n.place()
-        [Place('p2', MultiSet([]), tAll), Place('p1', MultiSet([]), tAll)]
+        >>> sorted(n.place(), key=lambda p: p.name)
+        [Place('p1', MultiSet([]), tAll), Place('p2', MultiSet([]), tAll)]
 
         @param name: the name of the place to retrieve or `None` to
             get the list of all the places in the net
@@ -3591,8 +3531,8 @@ class PetriNet (object) :
         Traceback (most recent call last):
           ...
         ConstraintError: transition 't' not found
-        >>> n.transition()
-        [Transition('t2', Expression('True')), Transition('t1', Expression('True'))]
+        >>> sorted(n.transition(), key=lambda t: t.name)
+        [Transition('t1', Expression('True')), Transition('t2', Expression('True'))]
 
         @param name: the name of the transition to retrieve or `None`
             to get the list of all the transitions in the net
@@ -3899,7 +3839,7 @@ class PetriNet (object) :
         ... except ValueError : print(sys.exc_info()[1])
         forbidden token '3.14'
         >>> n.get_marking() # inconsistent
-        Marking({'p2': MultiSet([1])})
+        Marking(...)
 
         @param marking: the new marking
         @type marking: `Marking`
@@ -4146,7 +4086,7 @@ class PetriNet (object) :
         for place in srclist[1:] :
             new._check |= place._check
             new.tokens.add(place.tokens)
-        post = {}
+        post = _dict_factory()
         for place in srclist :
             for trans, label in place.post.items() :
                 if trans not in post :
@@ -4160,7 +4100,7 @@ class PetriNet (object) :
                 self.add_input(target, trans, labels[0])
             else :
                 self.add_input(target, trans, MultiArc(labels))
-        pre = {}
+        pre = _dict_factory()
         for place in srclist :
             for trans, label in place.pre.items() :
                 if trans not in pre :
@@ -4195,8 +4135,8 @@ class PetriNet (object) :
         ['t', 't1', 't2']
         >>> n.transition('t')
         Transition('t', Expression('(x==1) and (y==2)'))
-        >>> n.node('t').post
-        {'p2': MultiArc((Value(2.0), Value(2.0))), 'p1': Value(1)}
+        >>> n.node('t').post == {'p1': Value(1), 'p2': MultiArc((Value(2.0), Value(2.0)))}
+        True
 
         @param target: the name of the created transition
         @type target: `str`
@@ -4209,7 +4149,7 @@ class PetriNet (object) :
         for trans in srclist :
             new.guard &= trans.guard
         self.add_transition(new)
-        pre = {}
+        pre = _dict_factory()
         for trans in srclist :
             for place, label in trans.pre.items() :
                 if place not in pre :
@@ -4224,7 +4164,7 @@ class PetriNet (object) :
                 self.add_input(place, target, labels[0])
             else :
                 self.add_input(place, target, MultiArc(labels))
-        post = {}
+        post = _dict_factory()
         for trans in srclist :
             for place, label in trans.post.items() :
                 if place not in post :
@@ -4259,10 +4199,10 @@ class StateGraph (object) :
         self._todo = []
         self._done = set([])
         self._removed = set([])
-        self._state = {}
-        self._marking = {}
-        self._succ = {}
-        self._pred = {}
+        self._state = _dict_factory()
+        self._marking = _dict_factory()
+        self._succ = _dict_factory()
+        self._pred = _dict_factory()
         self._last = -1
         self._create_state(net.get_marking(), None, None, None)
         self._current = 0
@@ -4270,8 +4210,8 @@ class StateGraph (object) :
         self._last += 1
         self._marking[self._last] = marking
         self._state[marking] = self._last
-        self._pred[self._last] = {}
-        self._succ[self._last] = {}
+        self._pred[self._last] = _dict_factory()
+        self._succ[self._last] = _dict_factory()
         self._todo.append(self._last)
         return self._last
     def goto (self, state) :

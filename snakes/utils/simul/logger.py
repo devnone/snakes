@@ -15,13 +15,15 @@ class TerminalController:
     output to the terminal:
 
         >>> term = TerminalController()
-        >>> print 'This is '+term.GREEN+'green'+term.NORMAL
+        >>> print('This is '+term.GREEN+'green'+term.NORMAL)
+        This is green
 
     Alternatively, the `render()` method can used, which replaces
     '${action}' with the string required to perform 'action':
 
         >>> term = TerminalController()
-        >>> print term.render('This is ${GREEN}green${NORMAL}')
+        >>> print(term.render('This is ${GREEN}green${NORMAL}'))
+        This is green
 
     If the terminal doesn't support a given action, then the value of
     the corresponding instance variable will be set to ''.  As a
@@ -33,7 +35,8 @@ class TerminalController:
 
         >>> term = TerminalController()
         >>> if term.CLEAR_SCREEN:
-        ...     print 'This terminal supports clearning the screen.'
+        ...     # This terminal supports clearning the screen.
+        ...     pass
 
     Finally, if the width and height of the terminal are known, then
     they will be stored in the `COLS` and `LINES` attributes.

@@ -68,13 +68,9 @@ class Status (object) :
         <?xml version="1.0" encoding="utf-8"?>
         <pnml>...
          <status>
-          <name>
-           foo
-          </name>
+          <name>foo</name>
           <value>
-           <object type="int">
-            42
-           </object>
+           <object type="int">42</object>
           </value>
          </status>
         </pnml>
@@ -491,20 +487,24 @@ def extend (module) :
             >>> p = Place('p', status=Status('foo', 42))
             >>> p.__pnmldump__()
             <?xml version="1.0" encoding="utf-8"?>
-            <pnml>...
+            <pnml>
+             <snakes version=...>
+              <plugins>
+               <object type="tuple">
+                <object type="str">snakes...</object>
+                <object type="str">snakes...</object>
+               </object>
+              </plugins>
+             </snakes>
              <place id="p">
               <type domain="universal"/>
               <initialMarking>
                <multiset/>
               </initialMarking>
               <status>
-               <name>
-                foo
-               </name>
+               <name>foo</name>
                <value>
-                <object type="int">
-                 42
-                </object>
+                <object type="int">42</object>
                </value>
               </status>
              </place>
@@ -543,13 +543,9 @@ def extend (module) :
             <pnml>...
              <transition id="p">
               <status>
-               <name>
-                foo
-               </name>
+               <name>foo</name>
                <value>
-                <object type="int">
-                 42
-                </object>
+                <object type="int">42</object>
                </value>
               </status>
              </transition>

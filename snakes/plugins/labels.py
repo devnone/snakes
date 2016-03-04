@@ -97,15 +97,11 @@ def extend (module) :
             <?xml version="1.0" encoding="utf-8"?>
             <pnml>
              <transition id="t">
-              <label name="foo">
-               <object type="str">
-                bar
-               </object>
-              </label>
               <label name="spam">
-               <object type="int">
-                42
-               </object>
+               <object type="int">42</object>
+              </label>
+              <label name="foo">
+               <object type="str">bar</object>
               </label>
              </transition>
             </pnml>
@@ -173,15 +169,11 @@ def extend (module) :
               <initialMarking>
                <multiset/>
               </initialMarking>
-              <label name="foo">
-               <object type="str">
-                bar
-               </object>
-              </label>
               <label name="spam">
-               <object type="int">
-                42
-               </object>
+               <object type="int">42</object>
+              </label>
+              <label name="foo">
+               <object type="str">bar</object>
               </label>
              </place>
             </pnml>
@@ -245,15 +237,11 @@ def extend (module) :
             <?xml version="1.0" encoding="utf-8"?>
             <pnml>
              <net id="n">
-              <label name="foo">
-               <object type="str">
-                bar
-               </object>
-              </label>
               <label name="spam">
-               <object type="int">
-                42
-               </object>
+               <object type="int">42</object>
+              </label>
+              <label name="foo">
+               <object type="str">bar</object>
               </label>
              </net>
             </pnml>

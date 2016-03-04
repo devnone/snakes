@@ -43,7 +43,7 @@ if __name__ == "__main__" :
     except :
         emacs = [("share/emacs/site-lisp", ["utils/abcd-mode.el"])]
     #
-    setup(name="SNAKES",
+    setup(name="snakes-py3",
           version=open("VERSION").read().strip(),
           description="SNAKES is the Net Algebra Kit for Editors and Simulators",
           long_description=long_description,

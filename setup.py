@@ -56,6 +56,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Operating System :: OS Independent',cd
+        'Operating System :: OS Independent',
     ],
 )

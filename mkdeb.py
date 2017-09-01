@@ -1,6 +1,6 @@
 import os, os.path
 
-snakes_version = "0.9.17"
+snakes_version = "0.9.18"
 package_version = open("debian/VERSION").readline().strip()
 ppa_version = open("debian/PPA").readline().strip()
 changelog_version = open("debian/changelog").readline().split()[1].strip("()")

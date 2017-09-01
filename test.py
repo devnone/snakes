@@ -3,7 +3,7 @@ import doctest, sys, os, glob
 retcode = 0
 
 import snakes
-version = "0.9.17"
+version = "0.9.18"
 if snakes.version != version :
     print("Mismatched versions:")
     print("  snakes.version = %r" % snakes.version)

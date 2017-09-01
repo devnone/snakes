@@ -35,7 +35,7 @@ def abcd_resources():
 
 setup(
     name="snakes-py3",
-    version="0.9.17",
+    version="0.9.18",
     description="SNAKES is the Net Algebra Kit for Editors and Simulators",
     long_description=long_description,
     author="Franck Pommereau",
